@@ -11,6 +11,7 @@
 #include <qt/recentrequeststablemodel.h>
 #include <qt/sendcoinsdialog.h>
 #include <qt/transactiontablemodel.h>
+#include <qt/mintingtablemodel.h>
 
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
@@ -31,6 +32,7 @@
 WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, interfaces::Node& node, const PlatformStyle *platformStyle, OptionsModel *_optionsModel, QObject *parent) :
     QObject(parent), m_wallet(std::move(wallet)), m_node(node), optionsModel(_optionsModel), addressTableModel(0),
     transactionTableModel(0),
+    mintingTableModel(0),
     recentRequestsTableModel(0),
     cachedEncryptionStatus(Unencrypted),
     cachedNumBlocks(0)
@@ -306,6 +308,11 @@ AddressTableModel *WalletModel::getAddressTableModel()
 TransactionTableModel *WalletModel::getTransactionTableModel()
 {
     return transactionTableModel;
+}
+
+MintingTableModel *WalletModel::getMintingTableModel()
+{
+    return mintingTableModel;
 }
 
 RecentRequestsTableModel *WalletModel::getRecentRequestsTableModel()

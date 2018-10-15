@@ -125,6 +125,7 @@ private:
     QAction* showHelpMessageAction = nullptr;
     QAction* m_wallet_selector_label_action = nullptr;
     QAction* m_wallet_selector_action = nullptr;
+    QAction* mintingAction = nullptr;
 
     QLabel *m_wallet_selector_label = nullptr;
     QComboBox* m_wallet_selector = nullptr;
@@ -233,6 +234,8 @@ private Q_SLOTS:
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
     void gotoVerifyMessageTab(QString addr = "");
+
+    void gotoMintingPage();
 
     /** Show open dialog */
     void openClicked();

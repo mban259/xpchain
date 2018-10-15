@@ -28,6 +28,7 @@ class OptionsModel;
 class PlatformStyle;
 class RecentRequestsTableModel;
 class TransactionTableModel;
+class MintingTableModel;
 class WalletModelTransaction;
 
 class CCoinControl;
@@ -138,6 +139,7 @@ public:
     OptionsModel *getOptionsModel();
     AddressTableModel *getAddressTableModel();
     TransactionTableModel *getTransactionTableModel();
+    MintingTableModel *getMintingTableModel();
     RecentRequestsTableModel *getRecentRequestsTableModel();
 
     EncryptionStatus getEncryptionStatus() const;
@@ -226,6 +228,7 @@ private:
 
     AddressTableModel *addressTableModel;
     TransactionTableModel *transactionTableModel;
+    MintingTableModel *mintingTableModel;
     RecentRequestsTableModel *recentRequestsTableModel;
 
     // Cache some values to be able to detect changes

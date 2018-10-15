@@ -122,6 +122,7 @@ BITCOIN_CORE_H = \
   indirectmap.h \
   init.h \
   kernel.h \
+  kernelrecord.h \
   interfaces/handler.h \
   interfaces/node.h \
   interfaces/wallet.h \
