@@ -43,17 +43,12 @@ static const int MAX_URI_LENGTH = 255;
 /* QRCodeDialog -- size of exported QR Code image */
 #define QR_IMAGE_SIZE 300
 
-/* Colors for minting tab for each coin age group */
-#define COLOR_MINT_YOUNG QColor(128, 64, 64)
-#define COLOR_MINT_MATURE QColor(64, 128, 64)
-#define COLOR_MINT_OLD QColor(26, 77, 26)
-
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Bitcoin"
-#define QAPP_ORG_DOMAIN "bitcoin.org"
-#define QAPP_APP_NAME_DEFAULT "Bitcoin-Qt"
-#define QAPP_APP_NAME_TESTNET "Bitcoin-Qt-testnet"
+#define QAPP_ORG_NAME "XPChain"
+#define QAPP_ORG_DOMAIN "xpchain"
+#define QAPP_APP_NAME_DEFAULT "XPChain-Qt"
+#define QAPP_APP_NAME_TESTNET "XPChain-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H
