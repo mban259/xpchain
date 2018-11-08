@@ -1233,7 +1233,7 @@ CAmount GetProofOfStakeReward(int nHeight, CAmount nAmount, uint32_t nTime, cons
     double_t coefficient = dRewardCurveMaximum / (1.0 + (dRewardCurveMaximum / dRewardCurveBase - 1.0) * exp(-dRewardCurveSteepness * nTime));
     coefficient = std::min(coefficient, dRewardCurveLimit);
 
-    return (CAmount) annual * coefficient / 365;
+    return (CAmount) annual * coefficient / (nTime / (365 * 24 * 60 * 60));
 }
 
 bool IsInitialBlockDownload()
