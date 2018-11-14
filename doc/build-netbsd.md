@@ -25,7 +25,7 @@ python27
 
 Download the source code:
 ```
-git clone https://github.com/bitcoin/bitcoin
+git clone https://github.com/xpchain/xpchain
 ```
 
 See [dependencies.md](dependencies.md) for a complete overview.

@@ -43,7 +43,7 @@ Build XPChain Core
 
 1. Clone the XPChain Core source code and cd into `bitcoin`
 
-        git clone https://github.com/bitcoin/bitcoin
+        git clone https://github.com/xpchain/xpchain
         cd bitcoin
 
 2.  Build XPChain Core:
@@ -93,4 +93,4 @@ Notes
 
 * Tested on OS X 10.10 Yosemite through macOS 10.13 High Sierra on 64-bit Intel processors only.
 
-* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcoin/bitcoin/issues/7714)
+* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/xpchain/xpchain/issues/7714)
