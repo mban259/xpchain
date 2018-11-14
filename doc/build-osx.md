@@ -41,10 +41,10 @@ from the root of the repository.
 Build XPChain Core
 ------------------------
 
-1. Clone the XPChain Core source code and cd into `bitcoin`
+1. Clone the XPChain Core source code and cd into `xpchain`
 
         git clone https://github.com/xpchain/xpchain
-        cd bitcoin
+        cd xpchain
 
 2.  Build XPChain Core:
 
@@ -67,15 +67,15 @@ Build XPChain Core
 Running
 -------
 
-XPChain Core is now available at `./src/bitcoind`
+XPChain Core is now available at `./src/xpchaind`
 
 Before running, it's recommended that you create an RPC configuration file.
 
-    echo -e "rpcuser=bitcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/XPChain/bitcoin.conf"
+    echo -e "rpcuser=xpchainrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/XPChain/xpchain.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/XPChain/bitcoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/XPChain/xpchain.conf"
 
-The first time you run bitcoind, it will start downloading the blockchain. This process could take several hours.
+The first time you run xpchaind, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
@@ -84,9 +84,9 @@ You can monitor the download process by looking at the debug.log file:
 Other commands:
 -------
 
-    ./src/bitcoind -daemon # Starts the bitcoin daemon.
-    ./src/bitcoin-cli --help # Outputs a list of command-line options.
-    ./src/bitcoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/xpchaind -daemon # Starts the xpchain daemon.
+    ./src/xpchain-cli --help # Outputs a list of command-line options.
+    ./src/xpchain-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----
