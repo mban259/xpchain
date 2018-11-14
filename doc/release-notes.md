@@ -1,7 +1,7 @@
 (note: this is a temporary file, to be added-to by anybody, and moved to
 release-notes at release time)
 
-Bitcoin Core version *version* is now available from:
+XPChain Core version *version* is now available from:
 
   <https://bitcoincore.org/bin/bitcoin-core-*version*/>
 
@@ -47,10 +47,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Bitcoin Core is extensively tested on multiple operating systems using
+XPChain Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+XPChain Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't

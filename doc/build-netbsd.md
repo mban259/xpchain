@@ -30,7 +30,7 @@ git clone https://github.com/bitcoin/bitcoin
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
-### Building Bitcoin Core
+### Building XPChain Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 
