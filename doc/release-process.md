@@ -292,9 +292,9 @@ bitcoin.org (see below for bitcoin.org update instructions).
 
   - bitcoin-dev and bitcoin-core-dev mailing list
 
-  - XPChain Core announcements list https://bitcoincore.org/en/list/announcements/join/
+  - XPChain Core announcements list https://xpchaincore.org/en/list/announcements/join/
 
-  - bitcoincore.org blog post
+  - xpchaincore.org blog post
 
   - Update title of #bitcoin on Freenode IRC
 

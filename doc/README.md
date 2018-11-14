@@ -5,7 +5,7 @@ Setup
 ---------------------
 XPChain Core is the original XPChain client and it builds the backbone of the network. It downloads and, by default, stores the entire history of XPChain transactions (which is currently more than 100 GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download XPChain Core, visit [bitcoincore.org](https://bitcoincore.org/en/releases/).
+To download XPChain Core, visit [xpchaincore.org](https://xpchaincore.org/en/releases/).
 
 Running
 ---------------------
