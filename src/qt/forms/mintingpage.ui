@@ -1,6 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MintingPage</class>
- <widget class="QWidget" name="MintingPage">
-  </widget>
+<class>MintingPage</class>
+<widget class="QDialog" name="MintingPage">
+ <property name="geometry">
+  <rect>
+   <x>0</x>
+   <y>0</y>
+   <width>1000</width>
+   <height>500</height>
+  </rect>
+ </property>
+ <property name="windowTitle">
+  <string>Coin Selection</string>
+ </property>
+ <layout class="QGridLayout" name="gridLayout_3">
+  <item row="1" column="1" colspan="4">
+   <widget class="QTableWidget" name="mintingtableWidget">
+    <property name="showGrid">
+     <bool>true</bool>
+    </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>150</number>
+    </attribute>
+    <attribute name="horizontalHeaderHighlightSections">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>25</number>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Transaction</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Address</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Balance</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Age</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Coinday</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>MintingProbability</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>MintReward</string>
+     </property>
+    </column>
+
+   </widget>
+  </item>
+  <item row="2" column="1">
+   <widget class="QLabel" name="label_2">
+    <property name="text">
+     <string>transaction is too young</string>
+    </property>
+   </widget>
+  </item>
+  <item row="0" column="3">
+   <widget class="QLabel" name="label">
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>Display mintin probability within</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="3">
+   <widget class="QLabel" name="label_4">
+    <property name="text">
+     <string>transaction has reached maximum probability</string>
+    </property>
+   </widget>
+  </item>
+  <item row="0" column="4">
+   <widget class="QComboBox" name="comboBox">
+    <item>
+     <property name="text">
+      <string>90Days</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>60Days</string>
+     </property>
+    </item>
+   </widget>
+  </item>
+  <item row="2" column="2">
+   <widget class="QLabel" name="label_3">
+    <property name="text">
+     <string>transaction is mature</string>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</widget>
+<resources/>
+<connections/>
 </ui>

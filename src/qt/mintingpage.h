@@ -4,10 +4,10 @@
  #ifndef BITCOIN_QT_MINTINGPAGE_H
 #define BITCOIN_QT_MINTINGPAGE_H
  #include <amount.h>
-#include <QWidget>
+#include <QDialog>
 #include <memory>
- class ClientModel;
-class TransactionFilterProxy;
+#include <QTableWidget>
+class ClientModel;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
@@ -18,13 +18,13 @@ class WalletModel;
 class QModelIndex;
 QT_END_NAMESPACE
  /** Overview ("home") page widget */
-class MintingPage : public QWidget
+class MintingPage : public QDialog
 {
     Q_OBJECT
  public:
-    explicit MintingPage(const PlatformStyle *platformStyle, QWidget *parent = 0);
+    explicit MintingPage(const PlatformStyle *platformStyle, QDialog *parent = 0);
     ~MintingPage();
-     void setClientModel(ClientModel *clientModel);
+    void setClientModel(ClientModel *clientModel);
     void setWalletModel(WalletModel *walletModel);
     void showOutOfSyncWarning(bool fShow);
  Q_SIGNALS:
@@ -32,5 +32,6 @@ class MintingPage : public QWidget
     void outOfSyncWarningClicked();
  private:
     Ui::MintingPage *ui;
+    QTableWidgetItem *item;
  };
  #endif // BITCOIN_QT_MintingPage_H
