@@ -1,4 +1,4 @@
-# TOR SUPPORT IN BITCOIN
+# TOR SUPPORT IN XPCHAIN
 
 It is possible to run XPChain Core as a Tor hidden service, and connect to such services.
 
