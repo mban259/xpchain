@@ -68,9 +68,9 @@ can then be controlled by group membership.
 ### macOS
 
 Binary:              `/usr/local/bin/bitcoind`  
-Configuration file:  `~/Library/Application Support/Bitcoin/bitcoin.conf`  
-Data directory:      `~/Library/Application Support/Bitcoin`  
-Lock file:           `~/Library/Application Support/Bitcoin/.lock`  
+Configuration file:  `~/Library/Application Support/XPChain/bitcoin.conf`  
+Data directory:      `~/Library/Application Support/XPChain`  
+Lock file:           `~/Library/Application Support/XPChain/.lock`  
 
 Installing Service Configuration
 -----------------------------------
