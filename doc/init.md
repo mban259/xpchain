@@ -53,11 +53,11 @@ Paths
 
 All three configurations assume several paths that might need to be adjusted.
 
-Binary:              `/usr/bin/xpchaind`  
-Configuration file:  `/etc/xpchain/xpchain.conf`  
-Data directory:      `/var/lib/xpchaind`  
-PID file:            `/var/run/xpchaind/xpchaind.pid` (OpenRC and Upstart) or `/var/lib/xpchaind/xpchaind.pid` (systemd)  
-Lock file:           `/var/lock/subsys/xpchaind` (CentOS)  
+Binary:              `/usr/bin/xpchaind`
+Configuration file:  `/etc/xpchain/xpchain.conf`
+Data directory:      `/var/lib/xpchaind`
+PID file:            `/var/run/xpchaind/xpchaind.pid` (OpenRC and Upstart) or `/var/lib/xpchaind/xpchaind.pid` (systemd)
+Lock file:           `/var/lock/subsys/xpchaind` (CentOS)
 
 The configuration file, PID directory (if applicable) and data directory
 should all be owned by the xpchain user and group.  It is advised for security
@@ -67,10 +67,10 @@ can then be controlled by group membership.
 
 ### macOS
 
-Binary:              `/usr/local/bin/xpchaind`  
-Configuration file:  `~/Library/Application Support/XPChain/xpchain.conf`  
-Data directory:      `~/Library/Application Support/XPChain`  
-Lock file:           `~/Library/Application Support/XPChain/.lock`  
+Binary:              `/usr/local/bin/xpchaind`
+Configuration file:  `~/Library/Application Support/XPChain/xpchain.conf`
+Data directory:      `~/Library/Application Support/XPChain`
+Lock file:           `~/Library/Application Support/XPChain/.lock`
 
 Installing Service Configuration
 -----------------------------------
