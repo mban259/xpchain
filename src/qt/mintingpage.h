@@ -3,10 +3,16 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
  #ifndef BITCOIN_QT_MINTINGPAGE_H
 #define BITCOIN_QT_MINTINGPAGE_H
- #include <amount.h>
+#include <interfaces/wallet.h>
+#include <QWidget>
+#include <amount.h>
+#include <uint256.h>
+#include <QList>
 #include <QDialog>
 #include <memory>
 #include <QTableWidget>
+#include <QString>
+#include <QVariant>
 class ClientModel;
 class TxViewDelegate;
 class PlatformStyle;
@@ -32,6 +38,10 @@ class MintingPage : public QDialog
     void outOfSyncWarningClicked();
  private:
     Ui::MintingPage *ui;
+    WalletModel *walletModel;
     QTableWidgetItem *item;
- };
+
+private Q_SLOTS:
+    void update();
+};
  #endif // BITCOIN_QT_MintingPage_H
