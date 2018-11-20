@@ -4,6 +4,7 @@
 #include <qt/addresstablemodel.h>
 #include <qt/overviewpage.h>
 #include <qt/mintingpage.h>
+#include <qt/mintingfilterproxy.h>
 #include <qt/forms/ui_mintingpage.h>
 #include <qt/bitcoinunits.h>
 #include <qt/clientmodel.h>
@@ -14,6 +15,7 @@
 #include <qt/transactionfilterproxy.h>
 #include <qt/transactiontablemodel.h>
 #include <qt/walletmodel.h>
+#include <rpc/blockchain.h>
 #include <interfaces/wallet.h>
 #include <QAbstractItemDelegate>
 #include <QPainter>
@@ -61,26 +63,28 @@ void MintingPage::update()
     if (!walletModel || !walletModel->getOptionsModel() || !walletModel->getAddressTableModel())
         return;
 
-    //テーブル個別設定
+    //Table Initialize
     QTableWidgetItem *item ;
     QTableWidget* mintingtableWidget = ui->mintingtableWidget;
     mintingtableWidget->clearContents();
     mintingtableWidget->setRowCount(0);
-    //uiファイルに書ける
+    mintingtableWidget->setSortingEnabled(false);
+    
+    //Can write in ui
     mintingtableWidget->verticalHeader()->hide();
     mintingtableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section { background-color:silver }");
 
-    //uiファイルに書けるか未分類
+    //Unclassified
     mintingtableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    //uiファイルには書けない
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
-    mintingtableWidget->horizontalHeader()->setSectionResizeMode(6,QHeaderView::ResizeToContents);
+    //Can't write in ui
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(2,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(3,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(4,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Interactive);
+    mintingtableWidget->horizontalHeader()->setSectionResizeMode(6,QHeaderView::Interactive);
     // Keep up to date with wallet
     //interfaces::Wallet& wallet = walletModel->wallet();
     int nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
@@ -117,20 +121,32 @@ void MintingPage::update()
         itemOutput->setText(COLUMN_LABEL, sLabel);*/
 
         // Balance
-        //itemOutput->setText(COLUMN_AMOUNT, BitcoinUnits::format(nDisplayUnit, out.txout.nValue));
-        //itemOutput->setData(COLUMN_AMOUNT, Qt::UserRole, QVariant((qlonglong)out.txout.nValue)); // padding so that sorting works correctly
-
+        
         // Age
-        QVariant Age = QVariant((qlonglong)(GetAdjustedTime() - out.time) / 86400);
+        int64_t Age = (GetAdjustedTime() - out.time) / 86400;
 
         //CoinDay
-        QVariant coinDay = QVariant(0);
-        int64_t nWeight = GetAdjustedTime() - out.time - Params().GetConsensus().nStakeMinAge;
+        int64_t coinDay = 0;
+        int64_t nWeight = 0;
+        nWeight = GetAdjustedTime() - out.time - Params().GetConsensus().nStakeMinAge;
         if(nWeight >= 0){
           nWeight = (std::min)(nWeight, (int64_t)Params().GetConsensus().nStakeMaxAge);
-          coinDay = QVariant((qulonglong)(out.txout.nValue * nWeight ) / (COIN * 86400));
+          coinDay = ((out.txout.nValue * nWeight ) / (COIN * 86400));
         }
 
+        //Reward
+        int64_t PoSReward = 0;
+        if( nWeight >=  Params().GetConsensus().nStakeMinAge){
+        PoSReward = GetProofOfStakeReward(chainActive.Tip()->nHeight, out.txout.nValue, out.time, Params().GetConsensus());
+        }
+
+        //Probability
+        //const CBlockIndex *p = GetLastBlockIndex(chainActive.Tip(), true);
+        double difficulty = GetDifficulty(chainActive.Tip());
+
+        /*double prob = wtx->getProbToMintWithinNMinutes(difficulty, mintingInterval);
+        prob = prob * 100;
+        return prob;*/
 
         mintingtableWidget->insertRow (row + i);
         mintingtableWidget->setItem(row + i,0,item = new QTableWidgetItem);
@@ -138,18 +154,19 @@ void MintingPage::update()
         mintingtableWidget->setItem(row + i,1,item = new QTableWidgetItem);
         item->setData(Qt::DisplayRole,sAddress);
         mintingtableWidget->setItem(row + i,2,item = new QTableWidgetItem);
-        item->setText(BitcoinUnits::format(nDisplayUnit, out.txout.nValue));
-        item->setData(Qt::UserRole, QVariant((qlonglong)out.txout.nValue));
+        item->setData(Qt::DisplayRole, BitcoinUnits::format(nDisplayUnit, out.txout.nValue).toInt());
+        item->setData(Qt::UserRole, (qlonglong)out.txout.nValue);
         mintingtableWidget->setItem(row + i,3,item = new QTableWidgetItem);
-        item->setData(Qt::DisplayRole, Age);
+        item->setData(Qt::DisplayRole, (qlonglong)Age);
         item->setBackground(QColor(100, 10, 125));
         mintingtableWidget->setItem(row + i,4,item = new QTableWidgetItem);
-        item->setData(Qt::DisplayRole, coinDay);
+        item->setData(Qt::DisplayRole, (qlonglong)nWeight);
         item->setBackground(QColor(100, 10, 125));
         mintingtableWidget->setItem(row + i,5,item = new QTableWidgetItem);
-        item->setData(Qt::DisplayRole, (row + i) * 0.01);
+        item->setData(Qt::DisplayRole, difficulty);
         mintingtableWidget->setItem(row + i,6,item = new QTableWidgetItem);
-        item->setData(Qt::DisplayRole, (row + i) * 100);
+        item->setData(Qt::DisplayRole, BitcoinUnits::format(nDisplayUnit, PoSReward));
+        item->setData(Qt::UserRole, (qlonglong)PoSReward);
         i++;
 
 
@@ -159,6 +176,8 @@ void MintingPage::update()
 
       }
     }
+    
+    mintingtableWidget->setSortingEnabled(true);
     /*for (const auto& wtx : wallet.getWalletTxs()) {
         //
         // Credit
