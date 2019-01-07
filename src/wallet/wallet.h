@@ -682,6 +682,8 @@ private:
     int64_t nLastResend = 0;
     bool fBroadcastTransactions = false;
 
+    bool fWalletUnlockMintOnly = false;
+
     /**
      * Used to keep track of spent outpoints, and
      * detect and report conflicts (double-spends or
@@ -1220,6 +1222,19 @@ public:
 
     /** Clear percentages of staking reward distribution, and erase it from database file */
     bool DelRewardDistributionPcts();
+
+    bool GetfWalletUnlockMintOnly()
+    {
+        if (IsLocked()) {
+            fWalletUnlockMintOnly = false;
+        }
+        return fWalletUnlockMintOnly;
+    }
+
+    void SetfWalletUnlockMintOnly(bool b)
+    {
+        fWalletUnlockMintOnly = b;
+    }
 };
 
 /** A key allocated from the key pool. */
