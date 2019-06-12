@@ -124,6 +124,7 @@ BASE_SCRIPTS = [
     'wallet_importprunedfunds.py',
     'rpc_zmq.py',
     'rpc_signmessage.py',
+    'wallet_balance.py',
     'feature_nulldummy.py',
     'mempool_accept.py',
     'wallet_import_rescan.py',
@@ -152,6 +153,7 @@ BASE_SCRIPTS = [
     'p2p_node_network_limited.py',
     'feature_blocksdir.py',
     'feature_config_args.py',
+    'rpc_help.py',
     'feature_help.py',
     # Don't append tests at the end to avoid merge conflicts
     # Put them in a random line within the section that fits their approximate run-time
@@ -235,9 +237,7 @@ def main():
 
     logging.debug("Temporary test directory at %s" % tmpdir)
 
-    enable_wallet = config["components"].getboolean("ENABLE_WALLET")
-    enable_utils = config["components"].getboolean("ENABLE_UTILS")
-    enable_xpchaind = config["components"].getboolean("ENABLE_XPCHAIND")
+    enable_bitcoind = config["components"].getboolean("ENABLE_XPCHAIND")
 
     if config["environment"]["EXEEXT"] == ".exe" and not args.force:
         # https://github.com/bitcoin/bitcoin/commit/d52802551752140cf41f0d9a225a43e84404d3e9
@@ -245,9 +245,9 @@ def main():
         print("Tests currently disabled on Windows by default. Use --force option to enable")
         sys.exit(0)
 
-    if not (enable_wallet and enable_utils and enable_xpchaind):
-        print("No functional tests to run. Wallet, utils, and xpchaind must all be enabled")
-        print("Rerun `configure` with -enable-wallet, -with-utils and -with-daemon and rerun make")
+    if not enable_bitcoind:
+        print("No functional tests to run.")
+        print("Rerun ./configure with --with-daemon and then make")
         sys.exit(0)
 
     # Build list of tests

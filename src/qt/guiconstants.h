@@ -50,6 +50,7 @@ static const int MAX_URI_LENGTH = 255;
 #define QAPP_ORG_DOMAIN "xpchain"
 #define QAPP_APP_NAME_DEFAULT "XPChain-Qt"
 #define QAPP_APP_NAME_TESTNET "XPChain-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "XPChain-Qt-regtest"
 
 /* Colors for minting tab for each coin age group */
 #define COLOR_MINT_YOUNG QColor(214, 231, 249)

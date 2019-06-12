@@ -37,6 +37,7 @@
 #ifdef ENABLE_WALLET
 #include <wallet/wallet.h>
 #include <wallet/coincontrol.h>
+#include <shutdown.h>
 #endif
 
 // Unconfirmed transactions in the memory pool often depend on other
@@ -676,7 +677,7 @@ void BitcoinMinter(const std::shared_ptr<CWallet>& wallet)
     */
     try
     {
-        while (true)
+        while (!ShutdownRequested() && !wallet->GetUnloading())
         {
             int64_t start = GetTimeMillis();
             /*TODO:
@@ -768,7 +769,7 @@ void BitcoinMinter(const std::shared_ptr<CWallet>& wallet)
     }
 }
 
-void static ThreadStakeMinter(const std::shared_ptr<CWallet>& wallet)
+void static ThreadStakeMinter(std::shared_ptr<CWallet>& wallet)
 {
     LogPrintf("ThreadStakeMinter started %s\n", wallet->GetName());
     if (!gArgs.GetBoolArg("-minting", true))
@@ -782,6 +783,7 @@ void static ThreadStakeMinter(const std::shared_ptr<CWallet>& wallet)
         {
             BitcoinMinter(wallet);
             LogPrintf("ThreadStakeMinter exiting\n");
+            wallet.reset();
             return; // correct exiting
         }
         catch (std::exception& e) {
